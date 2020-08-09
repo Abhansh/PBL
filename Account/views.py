@@ -1,4 +1,3 @@
-from django.contrib.auth import login
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -43,7 +42,6 @@ class SignupView(APIView):
         if form.is_valid():
             user = form.save()
             os.mkdir('Files/{}'.format(form.data['username']))
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             response = {'RESULT': 'success'}
         else:
             error = dict(form.errors)
